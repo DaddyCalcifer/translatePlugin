@@ -17,30 +17,30 @@ import org.jetbrains.annotations.NotNull;
 public class TransliterationAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        // Получаем проект и редактор
+        // РџРѕР»СѓС‡Р°РµРј РїСЂРѕРµРєС‚ Рё СЂРµРґР°РєС‚РѕСЂ
         Project project = e.getProject();
         Editor editor = e.getDataContext().getData(PlatformDataKeys.EDITOR);
 
-        // Проверяем, что редактор доступен
+        // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СЂРµРґР°РєС‚РѕСЂ РґРѕСЃС‚СѓРїРµРЅ
         if (editor == null) {
-            Messages.showMessageDialog(project, "Редактор не доступен!", "Ошибка", Messages.getErrorIcon());
+            Messages.showMessageDialog(project, "Р РµРґР°РєС‚РѕСЂ РЅРµ РґРѕСЃС‚СѓРїРµРЅ!", "РћС€РёР±РєР°", Messages.getErrorIcon());
             return;
         }
 
-        // Получаем модель выделения текста
+        // РџРѕР»СѓС‡Р°РµРј РјРѕРґРµР»СЊ РІС‹РґРµР»РµРЅРёСЏ С‚РµРєСЃС‚Р°
         SelectionModel selectionModel = editor.getSelectionModel();
-        // Получаем выделенный текст
+        // РџРѕР»СѓС‡Р°РµРј РІС‹РґРµР»РµРЅРЅС‹Р№ С‚РµРєСЃС‚
         String selectedText = selectionModel.getSelectedText();
 
-        // Проверяем, что есть выделенный текст
+        // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РµСЃС‚СЊ РІС‹РґРµР»РµРЅРЅС‹Р№ С‚РµРєСЃС‚
         if (selectedText == null || selectedText.isEmpty()) {
-            Messages.showMessageDialog(project, "Нет выделенного текста!", "Ошибка", Messages.getErrorIcon());
+            Messages.showMessageDialog(project, "РќРµС‚ РІС‹РґРµР»РµРЅРЅРѕРіРѕ С‚РµРєСЃС‚Р°!", "РћС€РёР±РєР°", Messages.getErrorIcon());
             return;
         }
 
-        // Создаем действие записи для модификации документа
+        // РЎРѕР·РґР°РµРј РґРµР№СЃС‚РІРёРµ Р·Р°РїРёСЃРё РґР»СЏ РјРѕРґРёС„РёРєР°С†РёРё РґРѕРєСѓРјРµРЅС‚Р°
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            // Заменяем выделенный текст на транслитерированный
+            // Р—Р°РјРµРЅСЏРµРј РІС‹РґРµР»РµРЅРЅС‹Р№ С‚РµРєСЃС‚ РЅР° С‚СЂР°РЅСЃР»РёС‚РµСЂРёСЂРѕРІР°РЅРЅС‹Р№
             Transliterator transliterator = Transliterator.getInstance("Russian-Latin/BGN");
             String transliteratedText = transliterator.transliterate(selectedText);
             editor.getDocument().replaceString(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd(), transliteratedText);

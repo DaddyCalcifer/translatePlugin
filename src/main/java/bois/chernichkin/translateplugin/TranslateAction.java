@@ -35,27 +35,27 @@ public class TranslateAction extends AnAction {
     private static final String TARGET_LANGUAGE = "en";
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        // Ïîëó÷àåì ïğîåêò è ğåäàêòîğ
+        // ĞŸĞ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ Ğ¿Ñ€Ğ¾ĞµĞºÑ‚ Ğ¸ Ñ€ĞµĞ´Ğ°ĞºÑ‚Ğ¾Ñ€
         Project project = e.getProject();
         Editor editor = e.getDataContext().getData(PlatformDataKeys.EDITOR);
 
-        // Ïğîâåğÿåì, ÷òî ğåäàêòîğ äîñòóïåí
+        // ĞŸÑ€Ğ¾Ğ²ĞµÑ€ÑĞµĞ¼, Ñ‡Ñ‚Ğ¾ Ñ€ĞµĞ´Ğ°ĞºÑ‚Ğ¾Ñ€ Ğ´Ğ¾ÑÑ‚ÑƒĞ¿ĞµĞ½
         if (editor == null) {
-            Messages.showMessageDialog(project, "Ğåäàêòîğ íå äîñòóïåí!", "Îøèáêà", Messages.getErrorIcon());
+            Messages.showMessageDialog(project, "Ğ ĞµĞ´Ğ°ĞºÑ‚Ğ¾Ñ€ Ğ½Ğµ Ğ´Ğ¾ÑÑ‚ÑƒĞ¿ĞµĞ½!", "ĞÑˆĞ¸Ğ±ĞºĞ°", Messages.getErrorIcon());
             return;
         }
 
-        // Ïîëó÷àåì ìîäåëü âûäåëåíèÿ òåêñòà
+        // ĞŸĞ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ Ğ¼Ğ¾Ğ´ĞµĞ»ÑŒ Ğ²Ñ‹Ğ´ĞµĞ»ĞµĞ½Ğ¸Ñ Ñ‚ĞµĞºÑÑ‚Ğ°
         SelectionModel selectionModel = editor.getSelectionModel();
-        // Ïîëó÷àåì âûäåëåííûé òåêñò
+        // ĞŸĞ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ Ğ²Ñ‹Ğ´ĞµĞ»ĞµĞ½Ğ½Ñ‹Ğ¹ Ñ‚ĞµĞºÑÑ‚
         String selectedText = selectionModel.getSelectedText();
 
-        // Ïğîâåğÿåì, ÷òî åñòü âûäåëåííûé òåêñò
+        // ĞŸÑ€Ğ¾Ğ²ĞµÑ€ÑĞµĞ¼, Ñ‡Ñ‚Ğ¾ ĞµÑÑ‚ÑŒ Ğ²Ñ‹Ğ´ĞµĞ»ĞµĞ½Ğ½Ñ‹Ğ¹ Ñ‚ĞµĞºÑÑ‚
         if (selectedText == null || selectedText.isEmpty()) {
-            Messages.showMessageDialog(project, "Íåò âûäåëåííîãî òåêñòà!", "Îøèáêà", Messages.getErrorIcon());
+            Messages.showMessageDialog(project, "ĞĞµÑ‚ Ğ²Ñ‹Ğ´ĞµĞ»ĞµĞ½Ğ½Ğ¾Ğ³Ğ¾ Ñ‚ĞµĞºÑÑ‚Ğ°!", "ĞÑˆĞ¸Ğ±ĞºĞ°", Messages.getErrorIcon());
             return;
         }
-        // Ñîçäàåì äåéñòâèå çàïèñè äëÿ ìîäèôèêàöèè äîêóìåíòà
+        // Ğ¡Ğ¾Ğ·Ğ´Ğ°ĞµĞ¼ Ğ´ĞµĞ¹ÑÑ‚Ğ²Ğ¸Ğµ Ğ·Ğ°Ğ¿Ğ¸ÑĞ¸ Ğ´Ğ»Ñ Ğ¼Ğ¾Ğ´Ğ¸Ñ„Ğ¸ĞºĞ°Ñ†Ğ¸Ğ¸ Ğ´Ğ¾ĞºÑƒĞ¼ĞµĞ½Ñ‚Ğ°
         WriteCommandAction.runWriteCommandAction(project, () -> {
             String translated = "";
             try {
