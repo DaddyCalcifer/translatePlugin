@@ -30,8 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TranslateAction extends AnAction {
-    private static final String API_KEY = "AQVN0p2PkEPRepITuVYgedWRC6YIUR4LRKNXZnrz";
-    private static final String FOLDER_ID = "b1g2cep9bs1e44iudb9a";
+    private static final String API_KEY = "";
+    private static final String FOLDER_ID = "";
     private static final String TARGET_LANGUAGE = "en";
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
